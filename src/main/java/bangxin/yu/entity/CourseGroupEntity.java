@@ -17,25 +17,25 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-/****专业信息表****/
+/****课程组信息表****/
 @Entity
-@Table(name = "specialized")
-public class SpecializedEntity {
-	//ID
+@Table(name = "coursegroup")
+public class CourseGroupEntity {
+	//课程组ID
 	@Id
 	@Column(name = "id", nullable = false)
 	@GeneratedValue(generator = "id") // 注解----JPA通用策略生成器
 	@GenericGenerator(name = "id", strategy = "assigned") // 注解----自定义主键生成策略
 	private String id;
 	
+	//课程组名称
+	@Column(name = "coursegroupName", nullable = false)
+	private String coursegroupName;
+	
 	//学院名称
 	@Column(name = "instituteName", nullable = false)
 	private String instituteName;
 	
-	//专业名称
-	@Column(name = "specializedName", nullable = false)
-	private String specializedName;
-		
 	//创建日期
 	@Column(name = "date", nullable = false)
 	private Date date;
@@ -49,7 +49,7 @@ public class SpecializedEntity {
 	 */
 	@ManyToOne(cascade=CascadeType.ALL,optional=false)
 	@JoinColumn(name = "instituteId",
-			foreignKey = @ForeignKey(name = "FK_specialized_to_institute", 
+			foreignKey = @ForeignKey(name = "FK_coursegroup_to_institute", 
 		      	foreignKeyDefinition = "foreign key (instituteId) REFERENCES institute (id) ON DELETE CASCADE ON UPDATE CASCADE"))
 	private InstituteEntity institute;
 
@@ -61,8 +61,8 @@ public class SpecializedEntity {
 	 * @fetch：指定是否采⽤延迟加载
 	 * @optional：关联是否可选。如果设置为false，则必须始终存在⾮空关系
 	 */
-	@OneToMany(mappedBy = "specialized",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-    private List<ClassesEntity> classes;
+	@OneToMany(mappedBy = "coursegroup",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+    private List<TeacherEntity> teacher;
 
 	public String getId() {
 		return id;
@@ -72,20 +72,20 @@ public class SpecializedEntity {
 		this.id = id;
 	}
 
+	public String getCoursegroupName() {
+		return coursegroupName;
+	}
+
+	public void setCoursegroupName(String coursegroupName) {
+		this.coursegroupName = coursegroupName;
+	}
+
 	public String getInstituteName() {
 		return instituteName;
 	}
 
 	public void setInstituteName(String instituteName) {
 		this.instituteName = instituteName;
-	}
-
-	public String getSpecializedName() {
-		return specializedName;
-	}
-
-	public void setSpecializedName(String specializedName) {
-		this.specializedName = specializedName;
 	}
 
 	public Date getDate() {
@@ -104,12 +104,12 @@ public class SpecializedEntity {
 		this.institute = institute;
 	}
 
-	public List<ClassesEntity> getClasses() {
-		return classes;
+	public List<TeacherEntity> getTeacher() {
+		return teacher;
 	}
 
-	public void setClasses(List<ClassesEntity> classes) {
-		this.classes = classes;
+	public void setTeacher(List<TeacherEntity> teacher) {
+		this.teacher = teacher;
 	}
 	
 }

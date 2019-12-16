@@ -20,4 +20,12 @@ public class SecurityController {
     public String welcome() {
        return "welcome";
     }
+    
+    /**
+     * @学院信息页
+     */
+    @GetMapping("/institute")
+    public String institute() {
+       return "institute";
+    }
 }

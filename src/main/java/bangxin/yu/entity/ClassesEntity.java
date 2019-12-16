@@ -17,25 +17,33 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-/****专业信息表****/
+/****班级信息表****/
 @Entity
-@Table(name = "specialized")
-public class SpecializedEntity {
-	//ID
+@Table(name = "classes")
+public class ClassesEntity {
+	//班级ID
 	@Id
 	@Column(name = "id", nullable = false)
 	@GeneratedValue(generator = "id") // 注解----JPA通用策略生成器
 	@GenericGenerator(name = "id", strategy = "assigned") // 注解----自定义主键生成策略
 	private String id;
 	
+	//班级名称
+	@Column(name = "className", nullable = false)
+	private String className;
+	
 	//学院名称
 	@Column(name = "instituteName", nullable = false)
 	private String instituteName;
 	
+	//学院Id
+	@Column(name = "instituteId", nullable = false)
+	private String instituteId;
+	
 	//专业名称
 	@Column(name = "specializedName", nullable = false)
 	private String specializedName;
-		
+	
 	//创建日期
 	@Column(name = "date", nullable = false)
 	private Date date;
@@ -48,10 +56,11 @@ public class SpecializedEntity {
 	 * @foreignKey：更改外键信息
 	 */
 	@ManyToOne(cascade=CascadeType.ALL,optional=false)
-	@JoinColumn(name = "instituteId",
-			foreignKey = @ForeignKey(name = "FK_specialized_to_institute", 
-		      	foreignKeyDefinition = "foreign key (instituteId) REFERENCES institute (id) ON DELETE CASCADE ON UPDATE CASCADE"))
-	private InstituteEntity institute;
+	//专业Id,specializedId:外键
+	@JoinColumn(name = "specializedId",
+			foreignKey = @ForeignKey(name = "FK_classes_to_specialized", 
+		      	foreignKeyDefinition = "foreign key (specializedId) REFERENCES specialized (id) ON DELETE CASCADE ON UPDATE CASCADE"))
+	private SpecializedEntity specialized;
 
 	/**
 	 * @添加外键
@@ -61,8 +70,8 @@ public class SpecializedEntity {
 	 * @fetch：指定是否采⽤延迟加载
 	 * @optional：关联是否可选。如果设置为false，则必须始终存在⾮空关系
 	 */
-	@OneToMany(mappedBy = "specialized",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-    private List<ClassesEntity> classes;
+	@OneToMany(mappedBy = "classes",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+    private List<StudentEntity> student;
 
 	public String getId() {
 		return id;
@@ -72,12 +81,28 @@ public class SpecializedEntity {
 		this.id = id;
 	}
 
+	public String getClassName() {
+		return className;
+	}
+
+	public void setClassName(String className) {
+		this.className = className;
+	}
+
 	public String getInstituteName() {
 		return instituteName;
 	}
 
 	public void setInstituteName(String instituteName) {
 		this.instituteName = instituteName;
+	}
+
+	public String getInstituteId() {
+		return instituteId;
+	}
+
+	public void setInstituteId(String instituteId) {
+		this.instituteId = instituteId;
 	}
 
 	public String getSpecializedName() {
@@ -96,20 +121,20 @@ public class SpecializedEntity {
 		this.date = date;
 	}
 
-	public InstituteEntity getInstitute() {
-		return institute;
+	public SpecializedEntity getSpecialized() {
+		return specialized;
 	}
 
-	public void setInstitute(InstituteEntity institute) {
-		this.institute = institute;
+	public void setSpecialized(SpecializedEntity specialized) {
+		this.specialized = specialized;
 	}
 
-	public List<ClassesEntity> getClasses() {
-		return classes;
+	public List<StudentEntity> getStudent() {
+		return student;
 	}
 
-	public void setClasses(List<ClassesEntity> classes) {
-		this.classes = classes;
+	public void setStudent(List<StudentEntity> student) {
+		this.student = student;
 	}
 	
 }

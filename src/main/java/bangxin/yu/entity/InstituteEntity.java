@@ -2,7 +2,6 @@ package bangxin.yu.entity;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,7 +14,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-/****学院表****/
+/****学院信息表****/
 @Entity
 @Table(name = "institute")
 public class InstituteEntity {
