@@ -67,5 +67,5 @@ spring:
 # stripped before adding them to the entity manager（在将它们添加到实体管理器之前删除）
       properties:
           hibernate:
-             dialect: org.hibernate.dialect.MySQL5Dialect
+             dialect: org.hibernate.dialect.MySQL57Dialect #mysql版本
 

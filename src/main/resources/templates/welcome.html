@@ -21,6 +21,7 @@
 				<div class="kit-name-txt">
 					<h2>欢迎使用</h2>
 					<h3>教学质量持续改进系统</h3>
+					<button onclick="test()">测试</button>
 				</div>
 			</div>
 		</div>
@@ -116,4 +117,26 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
         <script src="assets/js/custom.js"></script>
     </body>
+    <script type="text/javascript">
+    function test(){
+    	var id = 2;
+    	$.ajax({
+  	      url : 'http://localhost:8016/deleteInstitute',
+  	      type : "POST",
+  	      data : JSON.stringify({                     //将数据转换为json格式
+  	    	"id":id
+          }),
+          contentType:  "application/json; charset=utf-8",
+  	      async : true,   //异步
+  	      dataType : "json", 
+  	      success : function(data) {
+  	         alert("删除成功！");
+  	      },
+  	      error : function() {
+  	    	  alert("删除失败");
+  	    	  }
+  	   });
+    }
+      
+    </script>
 </html>
