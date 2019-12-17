@@ -89,3 +89,9 @@ function article_shenqing(obj,id){
 	$(obj).parents("tr").find(".td-manage").html("");
 	layer.msg('已提交申请，耐心等待审核!', {icon: 1,time:2000});
 }
+
+/*用户-添加*/
+function institute_add(title,url,w,h){
+	console.log("进入！");
+	layer_show(title,url,w,h);
+}

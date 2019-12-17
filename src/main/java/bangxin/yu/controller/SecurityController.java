@@ -28,4 +28,12 @@ public class SecurityController {
     public String institute() {
        return "institute";
     }
+    
+    /**
+     * @学院信息页
+     */
+    @GetMapping("/institute_add")
+    public String institute_add() {
+       return "institute_add";
+    }
 }
